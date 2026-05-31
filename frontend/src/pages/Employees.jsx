@@ -69,7 +69,7 @@ function AccountsPanel({ emp }) {
               Contas provisionadas — {emp.name}
             </span>
           </div>
-          <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-4">
             <AccountRow
               icon={Mail}
               label="E-mail Corporativo"

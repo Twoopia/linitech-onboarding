@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import { useAuth } from './contexts/AuthContext'
 import Sidebar from './components/Sidebar'
@@ -12,14 +13,26 @@ import Logs from './pages/Logs'
 
 function AppLayout() {
   const { isAuthenticated } = useAuth()
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
   if (!isAuthenticated) return <Navigate to="/login" replace />
 
   return (
     <div className="grain flex h-full bg-bg">
-      <Sidebar />
-      <div className="flex flex-col flex-1 min-w-0 ml-60">
-        <Topbar />
-        <main className="flex-1 overflow-y-auto p-6">
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-30 md:hidden"
+          style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(2px)' }}
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+
+      <div className="flex flex-col flex-1 min-w-0 md:ml-60">
+        <Topbar onMenuClick={() => setSidebarOpen(true)} />
+        <main className="flex-1 overflow-y-auto p-4 md:p-6">
           <Outlet />
         </main>
       </div>

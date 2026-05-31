@@ -84,6 +84,13 @@ body {
   transform: translateY(0);
 }
 
+/* Sidebar responsive */
+@media (min-width: 768px) {
+  aside.sidebar {
+    transform: translateX(0) !important;
+  }
+}
+
 /* Topbar blur */
 .topbar {
   backdrop-filter: blur(16px);

@@ -86,7 +86,7 @@ export default function Logs() {
           return (
             <div
               key={log.id}
-              className="flex items-start gap-4 px-5 py-4"
+              className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 px-4 sm:px-5 py-4"
               style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }}
             >
               {/* Action badge */}

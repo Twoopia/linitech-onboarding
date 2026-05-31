@@ -93,7 +93,7 @@ export default function Dashboard() {
       </div>
 
       {/* KPIs */}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard icon={Users} label="Total de Colaboradores" value={stats?.employees.total}
           sub={`${stats?.employees.inactive ?? 0} inativos`} color="#7C3AED" />
         <StatCard icon={Clock} label="Em Andamento" value={stats?.employees.in_progress}
@@ -104,7 +104,7 @@ export default function Dashboard() {
           sub={`${stats?.equipment.assigned ?? 0} atribuídos`} color="#9D6EFF" />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         {/* Progress card */}
         <div className="card p-5 animate">
           <div className="flex items-center gap-2 mb-4">
@@ -138,7 +138,7 @@ export default function Dashboard() {
         </div>
 
         {/* Recent activity */}
-        <div className="card p-5 lg:col-span-2 animate">
+        <div className="card p-5 xl:col-span-2 animate">
           <div className="flex items-center gap-2 mb-4">
             <Activity size={15} color="#7C3AED" />
             <span className="text-xs font-medium uppercase tracking-widest" style={{ color: '#6B5E4E' }}>

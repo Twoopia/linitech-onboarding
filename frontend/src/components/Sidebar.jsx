@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { LayoutDashboard, Users, CheckSquare, Monitor, ScrollText, Package, LogOut } from 'lucide-react'
+import { LayoutDashboard, Users, CheckSquare, Monitor, ScrollText, Package, LogOut, X } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 import toast from 'react-hot-toast'
 
@@ -19,7 +19,7 @@ const ROLE_COLORS = {
   gestor: { color: '#FBBF24', bg: 'rgba(251,191,36,0.1)', border: 'rgba(251,191,36,0.25)' },
 }
 
-export default function Sidebar() {
+export default function Sidebar({ open, onClose }) {
   const { logout, role } = useAuth()
   const navigate = useNavigate()
   const roleStyle = ROLE_COLORS[role] ?? ROLE_COLORS.rh
@@ -30,11 +30,20 @@ export default function Sidebar() {
     toast.success('Sessão encerrada')
   }
 
-  return (
-    <aside className="fixed left-0 top-0 bottom-0 w-60 flex flex-col z-40"
-      style={{ background: '#0D0D0D', borderRight: '1px solid rgba(255,255,255,0.06)' }}>
+  const handleNavClick = () => {
+    if (onClose) onClose()
+  }
 
-      {/* Logo */}
+  return (
+    <aside
+      className="sidebar fixed left-0 top-0 bottom-0 w-60 flex flex-col z-40 transition-transform duration-300"
+      style={{
+        background: '#0D0D0D',
+        borderRight: '1px solid rgba(255,255,255,0.06)',
+        transform: open ? 'translateX(0)' : 'translateX(-100%)',
+      }}
+    >
+      {/* Logo + close on mobile */}
       <div className="flex items-center gap-3 px-5 py-5">
         <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
           style={{ background: 'linear-gradient(135deg, #7C3AED, #5B21B6)', boxShadow: '0 0 20px rgba(124,58,237,0.3)' }}>
@@ -45,20 +54,24 @@ export default function Sidebar() {
             <rect x="10" y="10" width="6" height="6" rx="1.5" fill="white" fillOpacity="0.9" />
           </svg>
         </div>
-        <div>
+        <div className="flex-1">
           <p className="font-syne font-bold text-base leading-none" style={{ color: '#E8D5B5', letterSpacing: '-0.02em' }}>
             linitech
           </p>
           <p className="text-xs mt-0.5" style={{ color: '#6B5E4E' }}>onboarding</p>
         </div>
+        <button onClick={onClose} className="md:hidden w-7 h-7 flex items-center justify-center rounded-lg"
+          style={{ color: '#6B5E4E' }}>
+          <X size={15} />
+        </button>
       </div>
 
       <div style={{ height: 1, background: 'rgba(255,255,255,0.06)', margin: '0 16px' }} />
 
-      {/* Nav */}
       <nav className="flex flex-col gap-1 p-3 flex-1 mt-2">
         {links.map(({ to, icon: Icon, label }) => (
           <NavLink key={to} to={to} end={to === '/'}
+            onClick={handleNavClick}
             style={({ isActive }) => isActive
               ? { background: 'rgba(124,58,237,0.15)', color: '#9D6EFF', border: '1px solid rgba(124,58,237,0.2)' }
               : { color: '#6B5E4E', border: '1px solid transparent' }}
@@ -69,9 +82,7 @@ export default function Sidebar() {
         ))}
       </nav>
 
-      {/* Footer */}
       <div className="p-3 flex flex-col gap-2">
-        {/* Role badge */}
         <div className="flex items-center justify-between px-3 py-2 rounded-lg"
           style={{ background: roleStyle.bg, border: `1px solid ${roleStyle.border}` }}>
           <span className="text-xs font-semibold" style={{ color: roleStyle.color }}>

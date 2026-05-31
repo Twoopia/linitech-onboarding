@@ -135,7 +135,7 @@ function CredentialCard({ emp, onStatusChange }) {
         </div>
 
         {/* Credentials */}
-        <div className="p-4 grid grid-cols-1 gap-2 md:grid-cols-2">
+        <div className="p-4 grid grid-cols-1 gap-2 xl:grid-cols-2">
           <CredRow icon={Mail} label="E-mail Corporativo" value={emp.corporate_email} color="#9D6EFF" />
           <CredRow icon={MessageSquare} label="Microsoft Teams" value={emp.corporate_email} color="#FBBF24" />
           <CredRow icon={Github} label="Conta GitHub" value={`@${emp.username}`} color="#E8D5B5" />

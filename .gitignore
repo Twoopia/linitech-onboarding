@@ -21,6 +21,7 @@ env/
 node_modules/
 frontend/dist/
 frontend/.vite/
+/dist/
 .npm
 *.log
 npm-debug.log*

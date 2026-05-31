@@ -1,6 +1,6 @@
 {
   "name": "linitech-onboarding",
   "scripts": {
-    "vercel-build": "cd frontend && npm install && npm run build"
+    "build": "cd frontend && npm install && npm run build"
   }
 }
